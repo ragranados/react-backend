@@ -36,7 +36,7 @@ authController.doRegister = function (req, res) {
 
     passport.authenticate('local')(req, res, function () {
         console.log("authen");
-      res.redirect('/');
+      res.redirect('/login');
     });
   });
 };
@@ -44,7 +44,7 @@ authController.doRegister = function (req, res) {
 // Go to login page
 authController.login = function (req, res) {
     console.log("loginregister");
-  res.render('/login', {title: 'Sing in'});
+  res.redirect('/login');
 };
 
 // Post login
@@ -54,7 +54,8 @@ authController.doLogin = function (req, res) {
     failureRedirect: '/login',
     failureFlash: true
   })(req, res, function () {
-    res.redirect('/');
+    console.log("y esto?");
+    res.redirect('/home');
   });
 };
 
