@@ -4,9 +4,7 @@ var moongose = require("mongoose");
 var auth = require('../controllers/AuthController');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.get('/', auth.home);
 
 // restrict index for logged in user only
 router.get('/register', auth.register);

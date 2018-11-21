@@ -7,22 +7,19 @@ var authController = {};
 
 // Restrict access to root page
 authController.home = function (req, res) {
-    console.log("home");
-  res.render('index', {
-    user: req.user,
-    title: 'Express'
-  });
+  console.log("home");
+  res.redirect("/login");
 };
 
 // Go to registration page
 authController.register = function (req, res) {
-    console.log("register");
+  console.log("register");
   res.redirect('/register');
 };
 
 // Post registration
 authController.doRegister = function (req, res) {
-    console.log("doregister");
+  console.log("doregister");
   User.register(new User({
     name: req.body.name,
     lastname: req.body.lastname,
@@ -35,7 +32,7 @@ authController.doRegister = function (req, res) {
     }
 
     passport.authenticate('local')(req, res, function () {
-        console.log("authen");
+      console.log("authen");
       res.redirect('/login');
     });
   });
@@ -43,14 +40,15 @@ authController.doRegister = function (req, res) {
 
 // Go to login page
 authController.login = function (req, res) {
-    console.log("loginregister");
+  console.log("loginregister");
   res.redirect('/login');
 };
 
 // Post login
 authController.doLogin = function (req, res) {
-    console.log("dologinregister");
+  console.log("dologinregister");
   passport.authenticate('local', {
+    successRedirect: '/home',
     failureRedirect: '/login',
     failureFlash: true
   })(req, res, function () {
@@ -61,9 +59,9 @@ authController.doLogin = function (req, res) {
 
 // logout
 authController.logout = function (req, res) {
-    console.log("fuera");
+  console.log("fuera");
   req.logout();
-  res.clearCookie('sessionid', {path: '/'});
+  res.clearCookie('sessionid', { path: '/' });
   res.redirect('/');
 };
 
