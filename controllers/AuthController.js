@@ -49,8 +49,8 @@ authController.doLogin = function (req, res) {
   console.log("dologinregister");
   passport.authenticate('local', {
     successRedirect: '/home',
-    failureRedirect: '/login',
-    failureFlash: true
+    failureRedirect: '/register',
+    //failureFlash: true
   })(req, res, function () {
     console.log("y esto?");
     res.redirect('/home');
