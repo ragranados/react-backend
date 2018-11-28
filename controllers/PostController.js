@@ -1,24 +1,24 @@
 'use strict'
 const mongoose = require('mongoose'),
-    commentModel = require('../models/Comment');
+      postModel = require('../models/Post');
 
-var commentController = {};
+var postController ={};
 
 //CREATE
-commentController.create = function (req, res) {
+postController.create = function (req, res) {
     var data = {
         usuario: req.body.usuario,
-        comment: req.body.comment,
-        date: req.body.date
+        picture: req.body.picture,
+        comments: req.body.comments
     }
-    if (data.usuario && data.comment && data.date && data.usuario != '' && data.comment != '') {
-        let comment = new commentModel(data);
-        comment.save(function (err, saved) {
+    if (data.usuario && data.comments && data.picture && data.picture != '') {
+        let post = new postModel(data);
+        post.save(function (err, saved) {
             if (err) {
                 res.status(500);
                 res.json({ code: 500, err });
             } else {
-                res.json({ ok: true, message: 'Se ha guardado con exito', saved });
+                res.json({ ok: true, message: 'Se ha guardado con exito', guardado });
             }
         });
     } else {
@@ -28,9 +28,9 @@ commentController.create = function (req, res) {
 
 };
 //GET
-commentController.get = function (req, res) {
+postController.get = function (req, res) {
     // Buscar por id, el psot
-    commentModel.findOne({ _id: req.params.id }, function (err, post) {
+    postModel.findOne({ _id: req.params.id }, function (err, post) {
         if (err) {
             res.status(500);
             res.json({ code: 500, err });
@@ -41,9 +41,9 @@ commentController.get = function (req, res) {
 }
 
 //GETALL
-commentController.getAll = function (req, res) {
+postController.getAll = function (req, res) {
     // Obtener todos los post de la base datos
-    commentModel.find({}, function (err, posts) {
+    postModel.find({}, function (err, posts) {
         if (err) {
             res.status(500);
             res.json({ code: 500, err });
@@ -54,9 +54,9 @@ commentController.getAll = function (req, res) {
     // Enviarlos como respuesta en JSON
 };
 //DELETE
-commentController.delete = function (req, res) {
+postController.delete = function (req, res) {
     // intentar eliminar
-    commentModel.findByIdAndRemove(req.params.id, function (err, eliminado) {
+    postModel.findByIdAndRemove(req.params.id, function (err, eliminado) {
         if (err) {
             res.status(500);
             res.json({ code: 500, err });
@@ -65,4 +65,4 @@ commentController.delete = function (req, res) {
         }
     });
 };
-module.exports = commentController;
+module.exports = postController;

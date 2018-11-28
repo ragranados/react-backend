@@ -9,7 +9,7 @@ const mongoose = require('mongoose'),
 let PostSchema = new Schema({
     usuario : UserSchema.Schema,
     picture : String,
-    coments : [CommentSchema.Schema]
+    comments : [CommentSchema.Schema]
 });
 
 module.exports = mongoose.models.post || mongoose.model('post', PostSchema);
