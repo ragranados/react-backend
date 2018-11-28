@@ -21,6 +21,7 @@ authController.register = function (req, res) {
 authController.doRegister = function (req, res) {
   console.log("doregister");
   User.register(new User({
+    profilePicture: "img/prof.png",
     name: req.body.name,
     lastname: req.body.lastname,
     username: req.body.username

@@ -5,8 +5,12 @@ const mongoose = require('mongoose'),
     passportLocalMongoose = require('passport-local-mongoose');
 
 let UserSchema = new Schema({
-    /*profilePicture: String,*/
-    username: String,
+    profilePicture: String,
+    username: {
+        type: String,
+        unique: true,
+        index: true
+    },
     name: String,
     lastname: String,
     password: String
